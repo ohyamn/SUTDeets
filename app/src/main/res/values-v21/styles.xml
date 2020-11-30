@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name = "AppTheme.NoActionBar">
+        <item name = "windowActionBar">false</item>
+
+        <item name = "windowNoTitle">true</item>
+<!--only extra thing here for api 21 higher to make status bar transparent-->
+        <item name = "android:statusBarColor">@android:color/transparent</item>
+    </style>
+</resources>

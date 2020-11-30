@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">NaviTwo</string>
+    <string name="sample_text">Sample text</string>
+
+    <string name = "navigation_drawer_open">Open Navigation Drawer</string>
+    <string name = "navigation_drawer_close">Close Navigation Drawer</string>
+    <string name="message_fragment">Message Fragment</string>
+    <string name="profile_fragment">Profile Fragment</string>
+    <string name="chat_fragment">Chat Fragment</string>
+</resources>
