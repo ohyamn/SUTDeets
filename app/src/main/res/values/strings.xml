@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">SUTDeets</string>
+    <string name="login_button">Login</string>
+    <string name="logout_button">Logout</string>
+    <string name="signup_button">Sign Up</string>
+    <string name="sample_text">Sample Text</string>
+    <string name="already_a_user">Already a user? Login here!</string>
+    <string name="not_a_user">Not a user? Sign Up here!</string>
+    <string name="add_event_label">ADD NEW</string>
+    <string name="add_event_title">Title</string>
+    <string name="add_event_location">Location</string>
+    <string name="add_event_date">Date</string>
+    <string name="add_event_time_label">Time</string>
+    <string name="add_event_time_start">Start Time</string>
+    <string name="add_event_time_end">End Time</string>
+    <string name="add_event_button">+ Create</string>
+    <string name="add_event_time_to">To</string>
+</resources>
