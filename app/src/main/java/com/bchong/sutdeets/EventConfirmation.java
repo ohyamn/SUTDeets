@@ -2,6 +2,7 @@ package com.bchong.sutdeets;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,11 +16,11 @@ import java.text.SimpleDateFormat;
 
 public class EventConfirmation extends AppCompatActivity {
     TextView mNewEventTitle, mNewEventLocation, mNewEventTimeStart, mNewEventTimeEnd;
-    TextView mConfirmEventTitle, mConfirmEventLocation, mConfirmEventDate, mConfirmEventTime;
+    TextView mConfirmEventTitle, mConfirmEventLocation, mConfirmEventDate, mConfirmEventTime, mConfirmEventDescription;
     CalendarView mNewEventDate;
     Button mCancelButton, mConfirmButton;
 
-//    private DatabaseReference mDatabase;
+    DatabaseReference mDatabase;
 
 
     @Override
@@ -38,42 +39,37 @@ public class EventConfirmation extends AppCompatActivity {
         mConfirmEventLocation = findViewById(R.id.confirmEventLocation);
         mConfirmEventDate = findViewById(R.id.confirmEventDate);
         mConfirmEventTime = findViewById(R.id.confirmEventTime);
+        mConfirmEventDescription = findViewById(R.id.confirmEventDescription);
 
+        final Bundle eventDetails = getIntent().getExtras();
+        mConfirmEventTitle.setText("Title: " + eventDetails.getString("eventTitle"));
+        mConfirmEventLocation.setText("Location: " + eventDetails.getString("eventLocation"));
+        mConfirmEventDate.setText("Date: " + eventDetails.getString("eventDate"));
+        mConfirmEventTime.setText("Time: " + eventDetails.getString("eventTimeStart") + " to " + eventDetails.getString("eventTimeEnd"));
+        mConfirmEventDescription.setText("Description: " + eventDetails.getString("eventDescription"));
 
-//        mConfirmEventTitle = findViewById(R.id.confirmEventTitle);
-//        mConfirmEventTitle.setText(mNewEventTitle.getText().toString());
-//
-//        mConfirmEventLocation = findViewById(R.id.confirmEventLocation);
-//        mConfirmEventLocation.setText(mNewEventLocation.getText().toString());
-//
-////        mConfirmEventDate = findViewById(R.id.confirmEventDate);
-////        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
-////        String dateString = sdf.format(mNewEventDate.getDate());
-////        mConfirmEventDate.setText(dateString);
-//
-//        mConfirmEventTime = findViewById(R.id.confirmEventTime);
-//        mConfirmEventTime.setText("hello world");
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
+        mCancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish(); //return to previous activity while saving state
+            }
+        });
 
-//        mDatabase = FirebaseDatabase.getInstance().getReference();
-
-//        final EventDetails event = new EventDetails(
-//                mNewEventLocation.toString(),
-//                mNewEventDate.toString(),
-//                mNewEventTimeStart.toString(),
-//                mNewEventTimeEnd.toString());
-//
-//        mConfirmButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                event.EventToDB(
-//                        mNewEventTitle.toString(),
-//                        mNewEventLocation.toString(),
-//                        mNewEventDate.toString(),
-//                        mNewEventTimeStart.toString(),
-//                        mNewEventTimeEnd.toString());
-//            }
-//        });
+        mConfirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EventDetails testPush = new EventDetails(
+                        eventDetails.getString("eventTitle"),
+                        eventDetails.getString("eventLocation"),
+                        eventDetails.getString("eventDate"),
+                        eventDetails.getString("eventTimeStart"),
+                        eventDetails.getString("eventTimeEnd"),
+                        eventDetails.getString("eventDescription"));
+                mDatabase.child("Testing").child("Test Event").setValue(testPush);
+            }
+        });
 
 
     }
